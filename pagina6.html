@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1c1c1e;
+            color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+        }
+        
+        h1 {
+            color: #bb86fc;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Contenedor principal */
+        .container {
+            background-color: #2c2c2e;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Estilo de los botones */
+        .button-group {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            background-color: #bb86fc;
+            color: #1c1c1e;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button:hover {
+            background-color: #9a64db;
+            transform: scale(1.05);
+        }
+
+        /* Partículas */
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: #bb86fc;
+            border-radius: 50%;
+            animation: particle-animation 0.8s ease forwards;
+        }
+
+        @keyframes particle-animation {
+            0% {
+                opacity: 1;
+                transform: scale(1) translate(0, 0);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.5) translate(50px, 50px);
+            }
+        }
+
+        /* Secciones ocultas */
+        .section {
+            display: none;
+            background-color: #3a3a3c;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .section.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enlace de contacto */
+        a {
+            color: #bb86fc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mi Perfil</h1>
+    <div class="container">
+        <!-- Grupo de botones -->
+        <div class="button-group">
+            <button class="button" onclick="showSection('sobreMi', event)">➊</button>
+            <button class="button" onclick="showSection('experiencia', event)">❷</button>
+            <button class="button" onclick="showSection('formasPago', event)">❸</button>
+        </div>
+
+        <!-- Sección Sobre mí -->
+        <div id="sobreMi" class="section">
+            <h2>¿Quien soy?</h2>
+            <p>Hola, mi nombre es Matías. Tengo trece años y me encanta aprender sobre desarrollo web. Me considero alguien creativo y dedicado.</p>
+            <p>Algunos de mis intereses incluyen la tecnología, ingeniera de software y sistemas de SQlite (Base de datos).</p>
+            <p>Contacto: ┇ IG: garat.ezel ┇ Allí es donde me comunico seguido. Si no: ┇ garat.ezel@gmail.com ┇ ♥ .</p>
+        </div>
+
+        <!-- Sección Experiencia -->
+        <div id="experiencia" class="section">
+            <h2>Conocimientos</h2>
+            <p>Actualmente estoy desarrollando mis habilidades en programación web y he aprendido algunos lenguajes y tecnologías, recalco, solo son los lenguajes donde mejor me se manejar, asi que podrian evitar hablar sobre C++:</p>
+            <ul>
+                <li>→ HTML: Básico a intermedio ← (No es un lenguaje, pero con esto estoy creando esta página) ;)</li>
+                <li>→ JavaScript: Principiante ← </li>
+                <li>→ Python: Básico, pero picante... ← </li>
+            </ul>
+            <p>Estoy buscando oportunidades para ganar experiencia trabajando en proyectos pequeños y ayudar en el desarrollo de aplicaciones web sencillas. Tanto para emprendedores o gente que quiera personalizar sus redes.</p>
+        </div>
+
+        <!-- Sección Formas de pago -->
+        <div id="formasPago" class="section">
+            <h2>Costos</h2>
+            <p> ╰┈➤ No es obligatorio pagarme, ya que estoy buscando ganar experiencia. Sin embargo, cualquier ayuda es bienvenida para poder seguir aprendiendo y mejorando mis habilidades. Eso si, páginas o enfoques más profesionales. No pido mucho, el precio se vera, ya que aun no soy alguien profesional como para cobrar... </p>
+        </div>
+    </div>
+
+    <script>
+        // Función para mostrar la sección seleccionada y ocultar las demás
+        function showSection(sectionId, event) {
+            // Oculta todas las secciones
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('show'));
+
+            // Muestra la sección seleccionada
+            const selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.classList.add('show');
+            }
+
+            // Efecto de partículas en el botón
+            const button = event.currentTarget;
+            createParticles(button);
+        }
+
+        // Función para crear partículas en el botón
+        function createParticles(button) {
+            for (let i = 0; i < 10; i++) {
+                const particle = document.createElement('span');
+                particle.classList.add('particle');
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                button.appendChild(particle);
+
+                // Elimina la partícula después de la animación
+                particle.addEventListener('animationend', () => particle.remove());
+            }
+        }
+    </script>
+</body>
+</html>
